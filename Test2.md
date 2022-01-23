@@ -1,4 +1,4 @@
-[Original Issue](undefined)
+[Original Issue](https://github.com/kadoshita/issue-to-docs/issues/5)
 
 
 
