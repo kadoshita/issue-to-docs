@@ -14,7 +14,7 @@ jobs:
         id: add-draft-label-to-new-issue
         with:
           script: |
-            await octokit.rest.issues.addLabels({
+            await github.rest.issues.addLabels({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
