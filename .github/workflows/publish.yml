@@ -25,6 +25,7 @@ jobs:
                 repo: context.repo.repo
             });
             
+            console.log(context.issue);
             const originalIssueLink = `[Original Issue](${context.issue.html_url})`;
 
             const text = [originalIssueLink, issue.data.body].concat(comments.data.map(d => d.body));
