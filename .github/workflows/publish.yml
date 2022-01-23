@@ -27,7 +27,7 @@ jobs:
             
             const originalIssueLink = `[Original Issue](${context.issue.url})`;
 
-            const text = [issue.data.body].concat(comments.data.map(d => d.body));
+            const text = [originalIssueLink, issue.data.body].concat(comments.data.map(d => d.body));
             const docs = {
                 title: issue.data.title,
                 text: text.join('\n\n')
