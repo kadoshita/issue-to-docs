@@ -1,0 +1,14 @@
+name: publish
+
+on:
+  issues:
+    types:
+      - labeled
+
+jobs:
+  get-all-comments:
+    if: contains(github.event.issue.labels.*.name, 'publish')
+    runs-on: ubuntu-latest
+    steps:
+      - name: print issue
+        run: echo toJSON(${{ github.event.issue }})
