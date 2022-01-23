@@ -24,6 +24,8 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo
             });
+            
+            const originalIssueLink = `[Original Issue](${context.issue.url})`;
 
             const text = [issue.data.body].concat(comments.data.map(d => d.body));
             const docs = {
