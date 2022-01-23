@@ -41,7 +41,7 @@ jobs:
             
             const result = await github.rest.repos.createOrUpdateFileContents({
               owner: context.repo.owner,
-              repo: context.repo.repo
+              repo: context.repo.repo,
               path: `${docs.title}.md`,
               message: `Add ${docs.title}.md`,
               content: base64,
