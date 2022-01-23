@@ -14,7 +14,6 @@ jobs:
         id: get-comments
         with:
           script: |
-            const issue_owner = ${{ github.event.issue
             const issue = await github.rest.issues.get({
               issue_number: context.issue.number,
               owner: context.repo.owner,
@@ -28,5 +27,6 @@ jobs:
             });
             console.log(comments);
             return comments;
+
       - name: print issue
         run: echo "${{ steps.get-comments.outputs.result }}"
