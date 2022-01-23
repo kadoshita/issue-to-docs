@@ -26,7 +26,13 @@ jobs:
               repo: context.repo.repo
             });
             console.log(comments);
-            return comments;
+            
+            const text = [issue.data.body, comments.data.map(d=>d.body)];
+            const docs = {
+              title: issue.data.title,
+              text: text.join('\n')
+            }
+            return docs;
 
       - name: print issue
-        run: echo "${{ steps.get-comments.outputs.result }}"
+        run: echo '${{ toJSON(steps.get-comments.outputs.result) }}'
