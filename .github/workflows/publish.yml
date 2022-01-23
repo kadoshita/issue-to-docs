@@ -10,5 +10,23 @@ jobs:
     if: contains(github.event.issue.labels.*.name, 'publish')
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/github-script@v5
+        id: get-comments
+        with:
+          script: |
+            const issue_owner = ${{ github.event.issue
+            const issue = await github.rest.issues.get({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+            console.log(issue);
+            const comments = await github.rest.issues.listComments({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+            console.log(comments);
+            return comments;
       - name: print issue
-        run: echo '${{ toJSON(github.event.issue) }}'
+        run: echo "${{ steps.get-comments.outputs.result }}"
