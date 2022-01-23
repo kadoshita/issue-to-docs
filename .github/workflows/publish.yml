@@ -6,7 +6,7 @@ on:
       - labeled
 
 jobs:
-  get-all-comments:
+  publish-issue-as-docs:
     if: contains(github.event.issue.labels.*.name, 'publish')
     runs-on: ubuntu-latest
     steps:
