@@ -25,7 +25,7 @@ jobs:
                 repo: context.repo.repo
             });
             
-            const originalIssueLink = `[Original Issue](${context.issue.url})`;
+            const originalIssueLink = `[Original Issue](${github.event.issue.html_url})`;
 
             const text = [originalIssueLink, issue.data.body].concat(comments.data.map(d => d.body));
             const docs = {
