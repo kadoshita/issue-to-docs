@@ -33,11 +33,17 @@ jobs:
             
             const base64 = (new Buffer(docs.text)).toString('base64');
             
+            const content = await github.rest.repos.getContent({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              path: `${docs.title}.md`
+            });
+            
+            console.log(content.data);
+            
             const user = await github.rest.users.getByUsername({
               username: context.repo.owner
             });
-            
-            console.log(user);
             
             const result = await github.rest.repos.createOrUpdateFileContents({
               owner: context.repo.owner,
