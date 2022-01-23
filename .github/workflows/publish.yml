@@ -47,11 +47,11 @@ jobs:
               content: base64,
               committer: {
                 name: context.repo.owner,
-                email: user.email
+                email: user.data.email
               },
               author:{
                 name: context.repo.owner,
-                email: user.email
+                email: user.data.email
               }
             });
             return result;
