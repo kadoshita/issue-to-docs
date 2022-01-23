@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@v5
-        id: get-comments
+        id: add-docs-from-comments
         with:
           script: |
             const issue = await github.rest.issues.get({
@@ -30,9 +30,31 @@ jobs:
             const text = [issue.data.body].concat(comments.data.map(d=>d.body));
             const docs = {
               title: issue.data.title,
-              text: text.join('\n')
-            }
-            return docs;
+              text: text.join('\n\n')
+            };
+            
+            const base64 = (new Buffer(docs.text)).toString('base64');
+            
+            const user = await github.rest.users.getByUsername({
+              username: context.repo.owner
+            });
+            
+            const result = await github.rest.repos.createOrUpdateFileContents({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+              path: `${docs.title}.md`,
+              message: `Add ${docs.title}.md`,
+              content: base64,
+              committer: {
+                name: context.repo.owner,
+                email: user.email
+              },
+              author:{
+                name: context.repo.owner,
+                email: user.email
+              }
+            });
+            return result;
 
       - name: print issue
         run: echo '${{ toJSON(steps.get-comments.outputs.result) }}'
