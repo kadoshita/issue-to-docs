@@ -27,7 +27,7 @@ jobs:
             });
             console.log(comments);
             
-            const text = [issue.data.body, comments.data.map(d=>d.body)];
+            const text = [issue.data.body].concat(comments.data.map(d=>d.body));
             const docs = {
               title: issue.data.title,
               text: text.join('\n')
