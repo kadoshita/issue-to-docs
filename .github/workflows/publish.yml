@@ -80,3 +80,17 @@ jobs:
             }
 
             await github.rest.repos.createOrUpdateFileContents(createOrUpdateFileContentsRequestParams);
+            
+            await github.rest.issues.removeLabel({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              name: 'publish'
+            });
+            
+            await github.rest.issues.update({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'closed'
+            });
