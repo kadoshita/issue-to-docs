@@ -19,13 +19,11 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo
             });
-            console.log(issue);
             const comments = await github.rest.issues.listComments({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo
             });
-            console.log(comments);
             
             const text = [issue.data.body].concat(comments.data.map(d=>d.body));
             const docs = {
@@ -38,6 +36,8 @@ jobs:
             const user = await github.rest.users.getByUsername({
               username: context.repo.owner
             });
+            
+            console.log(user);
             
             const result = await github.rest.repos.createOrUpdateFileContents({
               owner: context.repo.owner,
