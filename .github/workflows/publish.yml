@@ -78,6 +78,7 @@ jobs:
                   name: context.repo.owner,
                   email: user.data.email
                 }
+              };
             }
             
             const result = await github.rest.repos.createOrUpdateFileContents(createOrUpdateFileContentsRequestParams);
